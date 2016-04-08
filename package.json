@@ -1,0 +1,15 @@
+{
+  "name": "pretty-error",
+  "version": "1.0.0",
+  "description": "user friendly error code names",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sahil Arora sahilarora946@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nodejitsu/browsenpm.org"
+  },
+  "license": "ISC"
+}
