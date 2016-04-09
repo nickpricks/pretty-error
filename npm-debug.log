@@ -1,0 +1,93 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.3
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/sahilarora/pretty-error',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/sahilarora/.npm/pretty-errors/1.0.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/sahilarora/.npm/pretty-errors/1.0.0/package.tgz',
+9 verbose tar pack   '/Users/sahilarora/pretty-error' ]
+10 verbose tarball /Users/sahilarora/.npm/pretty-errors/1.0.0/package.tgz
+11 verbose folder /Users/sahilarora/pretty-error
+12 info prepublish pretty-errors@1.0.0
+13 verbose addLocalTarball adding from inside cache /Users/sahilarora/.npm/pretty-errors/1.0.0/package.tgz
+14 silly cache afterAdd pretty-errors@1.0.0
+15 verbose afterAdd /Users/sahilarora/.npm/pretty-errors/1.0.0/package/package.json not in flight; writing
+16 verbose afterAdd /Users/sahilarora/.npm/pretty-errors/1.0.0/package/package.json written
+17 silly publish { name: 'pretty-errors',
+17 silly publish   version: '1.0.0',
+17 silly publish   description: 'user friendly error code names',
+17 silly publish   main: 'index.js',
+17 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+17 silly publish   author: { name: 'Sahil Arora sahilarora946@gmail.com' },
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://github.com/sahilarora946/pretty-error.git' },
+17 silly publish   license: 'ISC',
+17 silly publish   readme: 'HTTP-friendly error objects\n\n[![Current Version]](https://www.npmjs.com/package/pretty-errors)\n\nLead Maintainer: [Sahil Arora](https://github.com/sahilarora946)\n\n<!-- toc -->\n\n- [pretty-errors](#pretty-errors)\n  - [Helper Methods](#helper-methods)\n    - [`create(statusCode, message, [data])`](#createstatuscode-message-data)\n  - [HTTP 4xx Errors](#http-4xx-errors)\n    - [`badRequest(message, [data])`](#badrequestmessage-data)\n    - [`unauthorized(message, [scheme])`](#unauthorizedmessage-scheme-attributes)\n    - [`forbidden(message, [data])`](#forbiddenmessage-data)\n    - [`notFound(message, [data])`](#notfoundmessage-data)\n    - [`methodNotAllowed(message, [data])`](#methodnotallowedmessage-data)\n    - [`notAcceptable(message, [data])`](#notacceptablemessage-data)\n    - [`proxyAuthRequired(message, [data])`](#proxyauthrequiredmessage-data)\n    - [`clientTimeout(message, [data])`](#clienttimeoutmessage-data)\n    - [`conflict(message, [data])`](#conflictmessage-data)\n    - [`resourceGone(message, [data])`](#resourcegonemessage-data)\n    - [`lengthRequired(message, [data])`](#lengthrequiredmessage-data)\n    - [`preconditionFailed(message, [data])`](#preconditionfailedmessage-data)\n    - [`entityTooLarge(message, [data])`](#entitytoolargemessage-data)\n    - [`uriTooLong(message, [data])`](#uritoolongmessage-data)\n    - [`unsupportedMediaType(message, [data])`](#unsupportedmediatypemessage-data)\n    - [`rangeNotSatisfiable(message, [data])`](#rangenotsatisfiablemessage-data)\n    - [`expectationFailed(message, [data])`](#expectationfailedmessage-data)\n    - [`badData(message, [data])`](#baddatamessage-data)\n    - [`preconditionRequired(message, [data])`](#preconditionrequiredmessage-data)\n    - [`tooManyRequests(message, [data])`](#toomanyrequestsmessage-data)\n    - [`illegal(message, [data])`](#illegalmessage-data)\n  - [HTTP 5xx Errors](#http-5xx-errors)\n    - [`badImplementation(message, [data])`](#badimplementationmessage-data)\n    - [`notImplemented(message, [data])`](#notimplementedmessage-data)\n    - [`badGateway(message, [data])`](#badgatewaymessage-data)\n    - [`serverTimeout(message, [data])`](#servertimeoutmessage-data)\n    - [`gatewayTimeout(message, [data])`](#gatewaytimeoutmessage-data)\n\n<!-- tocstop -->\n\n# pretty-errors\n\n**pretty-errors** provides a set of utilities for returning HTTP errors. Each utility returns a `pretty-errors` error response\nobject (instance of `Error`) which includes the following properties:\nstatusCode: 400, message: message\n- `statusCode` - the error code.\n- `message` - the error message.\n-  all the keys in data json and corresponding values\n\n\n```\n\n### `create(statusCode, message, [data])`\n\nGenerates an `Error` object with the **pretty-codes** decorations where:\n- `statusCode` - an HTTP error code number. Must be greater or equal 400.\n- `message` - message string.\n- `data` - additional error data set to `error.data` property.\n\n```js\nvar error = create(400, \'Bad request\', { timestamp: Date.now() });\n```\n\n## HTTP 4xx Errors\n\n### `badRequest(message, [data])`\n\nReturns a 400 Bad Request error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nbadRequest(\'invalid query\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 400,\n    "message": "invalid query"\n}\n```\n\n### `unauthorized(message, [scheme])`\n\nReturns a 401 Unauthorized error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nunauthorized(\'invalid password\');\n```\n\nGenerates the following response:\n\n```json\n{\n    "statusCode": 401,\n    "message": "invalid password"\n},\n"headers" {}\n```\n\n```js\nunauthorized(\'invalid password\');\n```\n\nGenerates the following response:\n\n```json\n{\n    "statusCode": 401,\n    "message": "invalid password",\n},\n```\n\n```js\nunauthorized(\'invalid password\', { ttl: 0, cache: null, foo: \'bar\' });\n```\n\nGenerates the following response:\n\n```json\n{\n    "statusCode": 401,\n    "message": "invalid password",\n    "ttl": 0,\n    "cache": "",\n    "foo": "bar"\n},\n```\n\n### `forbidden(message, [data])`\n\nReturns a 403 Forbidden error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nforbidden(\'try again some time\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 403,\n    "message": "try again some time"\n}\n```\n\n### `notFound(message, [data])`\n\nReturns a 404 Not Found error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nnotFound(\'missing\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 404,\n    "message": "missing"\n}\n```\n\n### `methodNotAllowed(message, [data])`\n\nReturns a 405 Method Not Allowed error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nmethodNotAllowed(\'that method is not allowed\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 405,\n    "message": "that method is not allowed"\n}\n```\n\n### `notAcceptable(message, [data])`\n\nReturns a 406 Not Acceptable error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nnotAcceptable(\'unacceptable\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 406,\n    "message": "unacceptable"\n}\n```\n\n### `proxyAuthRequired(message, [data])`\n\nReturns a 407 Proxy Authentication Required error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nproxyAuthRequired(\'auth missing\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 407,\n    "message": "auth missing"\n}\n```\n\n### `clientTimeout(message, [data])`\n\nReturns a 408 Request Time-out error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nclientTimeout(\'timed out\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 408,\n    "message": "timed out"\n}\n```\n\n### `conflict(message, [data])`\n\nReturns a 409 Conflict error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nconflict(\'there was a conflict\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 409,\n    "message": "there was a conflict"\n}\n```\n\n### `resourceGone(message, [data])`\n\nReturns a 410 Gone error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nresourceGone(\'it is gone\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 410,\n    "message": "it is gone"\n}\n```\n\n### `lengthRequired(message, [data])`\n\nReturns a 411 Length Required error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nlengthRequired(\'length needed\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 411,\n    "message": "length needed"\n}\n```\n\n### `preconditionFailed(message, [data])`\n\nReturns a 412 Precondition Failed error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\npreconditionFailed();\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 412,\n    }\n```\n\n### `entityTooLarge(message, [data])`\n\nReturns a 413 Request Entity Too Large error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nentityTooLarge(\'too big\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 413,\n    "message": "too big"\n}\n```\n\n### `uriTooLong(message, [data])`\n\nReturns a 414 Request-URI Too Large error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nuriTooLong(\'uri is too long\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 414,\n    "message": "uri is too long"\n}\n```\n\n### `unsupportedMediaType(message, [data])`\n\nReturns a 415 Unsupported Media Type error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nunsupportedMediaType(\'that media is not supported\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 415,\n    "message": "that media is not supported"\n}\n```\n\n### `rangeNotSatisfiable(message, [data])`\n\nReturns a 416 Requested Range Not Satisfiable error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nrangeNotSatisfiable();\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 416,\n    }\n```\n\n### `expectationFailed(message, [data])`\n\nReturns a 417 Expectation Failed error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nexpectationFailed(\'expected this to work\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 417,\n    "message": "expected this to work"\n}\n```\n\n### `badData(message, [data])`\n\nReturns a 422 Unprocessable Entity error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nbadData(\'your data is bad and you should feel bad\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 422,\n    "message": "your data is bad and you should feel bad"\n}\n```\n\n### `preconditionRequired(message, [data])`\n\nReturns a 428 Precondition Required error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\npreconditionRequired(\'you must supply an If-Match header\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 428,\n    "message": "you must supply an If-Match header"\n}\n```\n\n### `tooManyRequests(message, [data])`\n\nReturns a 429 Too Many Requests error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\ntooManyRequests(\'you have exceeded your request limit\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 429,\n    "message": "you have exceeded your request limit"\n}\n```\n\n### `illegal(message, [data])`\n\nReturns a 451 Unavailable For Legal Reasons error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nillegal(\'you are not permitted to view this resource for legal reasons\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 451,\n    "message": "you are not permitted to view this resource for legal reasons"\n}\n```\n\n## HTTP 5xx Errors\n\nAll 500 errors hide your message from the end user. Your message is recorded in the server log.\n\n### `badImplementation(message, [data])`\n\nReturns a 500 Internal Server Error error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nbadImplementation(\'terrible implementation\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 500,\n    "message": "An internal server error occurred"\n}\n```\n\n### `notImplemented(message, [data])`\n\nReturns a 501 Not Implemented error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nnotImplemented(\'method not implemented\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 501,\n    "message": "method not implemented"\n}\n```\n\n### `badGateway(message, [data])`\n\nReturns a 502 Bad Gateway error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nbadGateway(\'that is a bad gateway\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 502,\n    "message": "that is a bad gateway"\n}\n```\n\n### `serverTimeout(message, [data])`\n\nReturns a 503 Service Unavailable error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\nserverTimeout(\'unavailable\');\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "statusCode": 503,\n    "message": "unavailable"\n}\n```\n\n### `gatewayTimeout(message, [data])`\n\nReturns a 504 Gateway Time-out error where:\n- `message` - message.\n- `data` - optional additional error data.\n\n```js\ngatewayTimeout("error");\n```\n\nGenerates the following response payload:\n\n```json\n{\n    "message": "error"\n    "statusCode": 504,\n}\n```\n',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: '4d843df267838f4ab48535b041489095159c4d3f',
+17 silly publish   bugs: { url: 'https://github.com/sahilarora946/pretty-error/issues' },
+17 silly publish   homepage: 'https://github.com/sahilarora946/pretty-error#readme',
+17 silly publish   _id: 'pretty-errors@1.0.0',
+17 silly publish   _shasum: '0aaab8b4575b8bca66233106bbe96b40b8a68bf6',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name pretty-errors
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/pretty-errors
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/sahilarora/.npm/pretty-errors/1.0.0/package.tgz
+25 verbose request uri https://registry.npmjs.org/pretty-errors
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 1:36:56 PM
+28 verbose request using bearer token for auth
+29 verbose request id 96f121948210b212
+30 http request PUT https://registry.npmjs.org/pretty-errors
+31 http 403 https://registry.npmjs.org/pretty-errors
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=300',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Sat, 09 Apr 2016 08:06:59 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-iad2133-IAD',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1460189218.676797,VS0,VE1107',
+32 verbose headers   vary: 'Accept-Encoding' }
+33 verbose request invalidating /Users/sahilarora/.npm/registry.npmjs.org/pretty-errors on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 1.0.0." : pretty-errors
+35 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+36 verbose statusCode 403
+37 verbose pkgid pretty-errors
+38 verbose cwd /Users/sahilarora/pretty-error
+39 error Darwin 15.4.0
+40 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v4.2.3
+42 error npm  v2.14.7
+43 error code E403
+44 error "You cannot publish over the previously published version 1.0.0." : pretty-errors
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]

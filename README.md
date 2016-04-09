@@ -1,6 +1,6 @@
 HTTP-friendly error objects
 
-[![Current Version]](https://www.npmjs.com/package/pretty-errors)
+[[pretty-errors]](https://www.npmjs.com/package/pretty-errors)
 
 Lead Maintainer: [Sahil Arora](https://github.com/sahilarora946)
 
@@ -50,7 +50,6 @@ statusCode: 400, message: message
 -  all the keys in data json and corresponding values
 
 
-```
 
 ### `create(statusCode, message, [data])`
 
