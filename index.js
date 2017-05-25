@@ -252,7 +252,7 @@ exports.gatewayTimeout = function(message, options) {
 }
 exports.create = function(statusCode, message, data) {
 	var error_options = {statusCode: statusCode, message: message};
-	if(options){
+	if(error_options){
 		for(var attrname in options){
 			error_options[attrname] = options[attrname];
 		}
